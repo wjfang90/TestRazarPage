@@ -1,0 +1,22 @@
+﻿@page
+@model TestRazarPage.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form method="post">
+
+    <ul>
+        <li>
+            <label asp-for="@Model.Customer.Name">Name:</label>
+            <input asp-for="@Model.Customer.Name" />
+        </li>
+        <li>
+            <label asp-for="@Model.Customer.Age">Age:</label>
+            <input asp-for="@Model.Customer.Age" />
+        </li>
+    </ul>
+    <input type="submit"  value="save"/>
+</form>

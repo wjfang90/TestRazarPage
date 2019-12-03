@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h2>@Model.Message</h2>
+
+<div>
+    <a asp-page="create">create</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>name</th>
+            <th>age</th>
+            <th>operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Customers)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Age</td>
+                <td>
+                    <!--生成-->
+                    <a asp-page="/Edit" asp-route-id="@item.Id">Edit</a>
+                    <!--fang to do 删除不管用-->
+                    <button type="submit" asp-page-handler="del" asp-route-id="@item.Id" asp-page="/index">delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

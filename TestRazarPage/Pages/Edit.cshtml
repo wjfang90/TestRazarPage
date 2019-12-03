@@ -1,0 +1,22 @@
+﻿@page 
+@model TestRazarPage.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit customer name-@Model.Customer.Name</h1>
+<form method="post">
+
+    <ul>
+        <li>
+            <label asp-for="@Model.Customer.Name">Name:</label>
+            <input asp-for="@Model.Customer.Name" />
+        </li>
+        <li>
+            <label asp-for="@Model.Customer.Age">Age:</label>
+            <input asp-for="@Model.Customer.Age" />
+        </li>
+    </ul>
+    <input type="hidden" asp-for="@Model.Customer.Id" />
+    <input type="submit" value="save" />
+</form>
