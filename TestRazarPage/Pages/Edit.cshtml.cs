@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TestRazarPage.Entity;
 
@@ -21,6 +22,7 @@ namespace TestRazarPage.Pages
         [TempData]
         public string Message { get; set; }
 
+        //[BindProperty] 特性会启用模型绑定。
         [BindProperty]
         public Customer Customer { get; set; }
         public EditModel(ILogger<EditModel> logger, AppDbContext dbContext)
@@ -29,7 +31,7 @@ namespace TestRazarPage.Pages
             _dbContext = dbContext;
         }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task OnGetAsync(int id)
         {
             Customer =  await _dbContext.Customers.FindAsync(id);
 
@@ -37,10 +39,8 @@ namespace TestRazarPage.Pages
             {
                 Message = $"modify customer name={Customer.Name} not found";
                 _logger.LogError(Message);
-                return RedirectToPage("index");
+                RedirectToPage("index");
             }
-
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -52,11 +52,12 @@ namespace TestRazarPage.Pages
                 return Page();
             }
 
+            //修改
+            //_dbContext.Update(Customer);
+            _dbContext.Attach(Customer).State = EntityState.Modified;
+
             try
             {
-
-                _dbContext.Update(Customer);
-
                 await _dbContext.SaveChangesAsync();
 
                 Message = $"modify customer name={Customer.Name} success";

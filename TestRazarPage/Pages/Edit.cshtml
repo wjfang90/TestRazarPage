@@ -1,20 +1,28 @@
-﻿@page 
+﻿@* 设置page 路由模板后,index修改链接生成为 <a href="/Edit/1">Edit</a> *@
+@page "{id:int?}"
 @model TestRazarPage.Pages.EditModel
 @{
     ViewData["Title"] = "Edit";
 }
 
 <h1>Edit customer name-@Model.Customer.Name</h1>
+
+<div>
+    <a asp-page="./index">index</a>
+</div>
+
 <form method="post">
 
     <ul>
         <li>
             <label asp-for="@Model.Customer.Name">Name:</label>
             <input asp-for="@Model.Customer.Name" />
+            <span asp-validation-for="@Model.Customer.Name" class="text-danger"></span>
         </li>
         <li>
             <label asp-for="@Model.Customer.Age">Age:</label>
             <input asp-for="@Model.Customer.Age" />
+            <span asp-validation-for="@Model.Customer.Age" class="text-danger"></span>
         </li>
     </ul>
     <input type="hidden" asp-for="@Model.Customer.Id" />

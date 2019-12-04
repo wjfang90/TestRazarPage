@@ -23,6 +23,14 @@ namespace TestRazarPage.Pages
 
         [BindProperty]
         public List<Customer> Customers { get; set; }
+
+        /// <summary>
+        /// 查询条件
+        /// 出于安全原因，必须选择绑定 GET 请求数据以对模型属性进行分页
+        /// </summary>
+        [BindProperty(SupportsGet =true)]
+        public string SearchText { get; set; }
+
         public IndexModel(ILogger<IndexModel> logger, AppDbContext dbContext)
         {
             _logger = logger;
@@ -31,10 +39,22 @@ namespace TestRazarPage.Pages
 
         public void OnGet()
         {
-            Customers = _dbContext.Customers.ToList();
+            if(string.IsNullOrEmpty(SearchText))
+            {
+                Customers = _dbContext.Customers.ToList();
+            }
+            else
+            {
+                Customers = _dbContext.Customers.Where(t=>t.Name.Contains(SearchText.Trim())).ToList();
+            }
         }
 
-        public async Task<IActionResult> OnPostDelAsync(int id)
+        /// <summary>
+        /// 注意，asp-page-handler 属性值中省略了页处理程序方法名称的 On<Verb> 前缀。 如果方法是异步的，也省略 Async 后缀。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> OnGetDelAsync(int id)
         {
             var customer =  await _dbContext.Customers.FindAsync(id);
 
@@ -55,7 +75,7 @@ namespace TestRazarPage.Pages
 
                 _logger.LogInformation(Message);
 
-                return RedirectToPage("index");
+                return Page();
             }
             catch (Exception)
             {

@@ -6,16 +6,22 @@
 
 <h1>Create</h1>
 
+<div>
+    <a asp-page="./index">index</a>
+</div>
+
 <form method="post">
 
     <ul>
         <li>
             <label asp-for="@Model.Customer.Name">Name:</label>
             <input asp-for="@Model.Customer.Name" />
+            <span asp-validation-for="@Model.Customer.Name" class="text-danger"></span>
         </li>
         <li>
             <label asp-for="@Model.Customer.Age">Age:</label>
             <input asp-for="@Model.Customer.Age" />
+            <span asp-validation-for="@Model.Customer.Age" class="text-danger"></span>
         </li>
     </ul>
     <input type="submit"  value="save"/>

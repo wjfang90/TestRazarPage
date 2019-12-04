@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{searchText?}"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -7,10 +7,16 @@
 <h2>@Model.Message</h2>
 
 <div>
-    <a asp-page="create">create</a>
+    <a asp-page="./create">create</a>
 </div>
-
-<table>
+<div>
+    <form method="get">
+        <label asp-for="@Model.SearchText">Name</label>
+        <input asp-for="@Model.SearchText" />
+        <button type="submit" value="search">search</button>
+    </form>
+</div>
+<table class="table">
     <thead>
         <tr>
             <th>Id</th>
@@ -27,10 +33,13 @@
                 <td>@item.Name</td>
                 <td>@item.Age</td>
                 <td>
-                    <!--生成-->
-                    <a asp-page="/Edit" asp-route-id="@item.Id">Edit</a>
-                    <!--fang to do 删除不管用-->
-                    <button type="submit" asp-page-handler="del" asp-route-id="@item.Id" asp-page="/index">delete</button>
+                    <!--生成 <a href="/Edit?id=1">Edit</a>-->
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                    <!--asp-page 属性与 asp-route、asp-controller 和 asp-action 属性互斥。
+                        注意，asp-page-handler 属性值中省略了页处理程序方法名称的 On<Verb> 前缀。 如果方法是异步的，也省略 Async 后缀。
+                        生成 <a href="/?id=1&amp;handler=del">delete</a>
+                     -->
+                    <a asp-page-handler="del" asp-route-id="@item.Id" asp-page="./index">delete</a>
                 </td>
             </tr>
         }
