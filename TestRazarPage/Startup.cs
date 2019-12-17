@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//Ìí¼Óef core ÒıÓÃ
+//æ·»åŠ ef core å¼•ç”¨
 using Microsoft.EntityFrameworkCore;
 
 
@@ -26,7 +26,7 @@ namespace TestRazarPage
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Ìí¼ÓÄÚ´æÊı¾İ¿â
+            //æ·»åŠ å†…å­˜æ•°æ®åº“
             services.AddDbContext<AppDbContext>(option=>option.UseInMemoryDatabase("myMemoryDb"));
             services.AddRazorPages();
         }
