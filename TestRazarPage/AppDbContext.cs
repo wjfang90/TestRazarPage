@@ -2,6 +2,10 @@
 using TestRazarPage.Entity;
 namespace TestRazarPage
 {
+
+    /// <summary>
+    /// 添加 ef core
+    /// </summary>
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions option) : base(option)
