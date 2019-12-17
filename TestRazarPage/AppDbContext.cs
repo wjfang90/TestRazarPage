@@ -13,6 +13,10 @@ namespace TestRazarPage
 
         }
 
+        /// <summary>
+        /// 客户表对应实体
+        /// </summary>
+        /// <value></value>
         public DbSet<Customer> Customers { get; set; }
     }
 }
