@@ -7,7 +7,9 @@ namespace TestRazarPage.Entity
     /// </summary>
     public class Customer
     {
-        
+        /// <summary>
+        /// Id
+        /// </summary>
         public int Id { get; set; }
 
         [Required,MaxLength(30)]
