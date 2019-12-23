@@ -2,6 +2,9 @@
 
 namespace TestRazarPage.Entity
 {
+    /// <summary>
+    /// 客户实体
+    /// </summary>
     public class Customer
     {
         
